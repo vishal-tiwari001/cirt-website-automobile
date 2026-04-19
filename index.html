@@ -3114,12 +3114,33 @@
    MOBILE TUNING — comprehensive polish for touch devices
    ============================================================== */
 
+      /* ---- Global overflow safeguard: prevent horizontal scroll on any breakpoint ---- */
+      .cirt-autosifu-page {
+        overflow-x: hidden;
+      }
+      .cirt-autosifu-page img,
+      .cirt-autosifu-page svg {
+        max-width: 100%;
+      }
+
+      /* ---- Ultra-wide (>=1600px) — keep content readable, avoid over-stretch ---- */
+      @media (min-width: 1600px) {
+        .cirt-autosifu-container {
+          max-width: 1320px;
+        }
+      }
+
       /* ---- Tablet + below (<=900px) ---- */
       @media (max-width: 900px) {
         /* Tighter section rhythm */
         .cirt-autosifu-section {
           padding-top: clamp(64px, 10vw, 96px);
           padding-bottom: clamp(64px, 10vw, 96px);
+        }
+
+        /* Remove forced min-height so cards breathe naturally on smaller screens */
+        .cirt-autosifu-pillar {
+          min-height: 0;
         }
 
         /* Compliance Horizon Map → card list on mobile (2D plot doesn't work at small size) */
@@ -3191,6 +3212,25 @@
           font-size: 10.5px;
           padding: 6px 10px;
         }
+
+        /* Group by region on mobile — India first, Global next, Emerging last */
+        .cirt-autosifu-hml-dot-btn[data-type="india"] {
+          order: 1;
+        }
+        .cirt-autosifu-hml-dot-btn[data-type="global"] {
+          order: 2;
+        }
+        .cirt-autosifu-hml-dot-btn[data-type="emerging"] {
+          order: 3;
+        }
+
+        /* Outcomes — remove desktop divider lines that only make sense in 2x2 / 4-col */
+        .cirt-autosifu-outcome::before {
+          display: none;
+        }
+        .cirt-autosifu-outcome {
+          padding-left: 0 !important;
+        }
       }
 
       /* ---- Mobile (<=640px) ---- */
@@ -3198,9 +3238,9 @@
         .cirt-autosifu-page {
           font-size: 16px;
         }
-        .cirt-autosifu-container {
-          padding: 0 20px;
-        }
+
+        /* NOTE: Do NOT add container padding — section's --cirt-autosifu-gutter already handles it.
+     Adding more creates double-gutter and cramps content. */
 
         /* Hero */
         .cirt-autosifu-hero__stats {
@@ -3210,6 +3250,7 @@
         .cirt-autosifu-hero__eyebrow {
           font-size: 10.5px;
           padding: 8px 14px 8px 10px;
+          letter-spacing: 0.1em;
         }
         .cirt-autosifu-hero__actions {
           flex-direction: column;
@@ -3219,6 +3260,18 @@
         .cirt-autosifu-hero__actions .cirt-autosifu-btn {
           width: 100%;
           justify-content: center;
+        }
+        .cirt-autosifu-stat__value {
+          font-size: clamp(1.7rem, 8vw, 2.2rem);
+        }
+        .cirt-autosifu-stat__label {
+          font-size: 10px;
+        }
+
+        /* Context visual: lock aspect on mobile so it doesn't go too tall */
+        .cirt-autosifu-context__visual {
+          aspect-ratio: 4 / 3;
+          max-width: none;
         }
 
         /* ===== YEARS — tighter sizing on mobile, keep editorial italic serif ===== */
@@ -3263,7 +3316,7 @@
           font-size: 12.5px;
         }
 
-        /* Training tabs — horizontal scroll on small screens */
+        /* Training tabs — horizontal scroll + right-edge fade indicator */
         .cirt-autosifu-cap__tabs {
           flex-wrap: nowrap;
           overflow-x: auto;
@@ -3272,6 +3325,15 @@
           padding: 5px;
           scrollbar-width: none;
           -ms-overflow-style: none;
+          -webkit-overflow-scrolling: touch;
+          /* Gradient fade at right edge hints scrollability */
+          -webkit-mask-image: linear-gradient(
+            90deg,
+            #000 0,
+            #000 92%,
+            transparent
+          );
+          mask-image: linear-gradient(90deg, #000 0, #000 92%, transparent);
         }
         .cirt-autosifu-cap__tabs::-webkit-scrollbar {
           display: none;
@@ -3294,7 +3356,7 @@
           font-size: 10.5px;
         }
 
-        /* OEM marquee — smaller for mobile */
+        /* OEM marquee — smaller + wider mask fade for mobile */
         .cirt-autosifu-oem__name {
           font-size: 1.4rem;
         }
@@ -3304,6 +3366,22 @@
         .cirt-autosifu-oem__track {
           gap: 28px;
           animation-duration: 50s;
+        }
+        .cirt-autosifu-oem__marquee {
+          -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent,
+            #000 10%,
+            #000 90%,
+            transparent
+          );
+          mask-image: linear-gradient(
+            90deg,
+            transparent,
+            #000 10%,
+            #000 90%,
+            transparent
+          );
         }
 
         /* Acronym marquee smaller */
@@ -3319,9 +3397,11 @@
         }
         .cirt-autosifu-outlook__body h2 {
           font-size: clamp(1.7rem, 7.5vw, 2.2rem);
+          max-width: none;
         }
         .cirt-autosifu-outlook__sub {
           font-size: 0.95rem;
+          max-width: none;
         }
         .cirt-autosifu-outlook__list li {
           padding: 14px 0;
@@ -3372,6 +3452,10 @@
           font-size: 10.5px;
           padding: 6px 9px;
         }
+        .cirt-autosifu-lead__bio {
+          max-width: none;
+          font-size: 0.95rem;
+        }
 
         /* Compliance map dot-btn on mobile — tag column needs breathing room */
         .cirt-autosifu-hml-dot-btn {
@@ -3381,9 +3465,10 @@
           min-width: 84px;
         }
 
-        /* Pillars grid cards */
+        /* Pillars grid cards — tighter on mobile */
         .cirt-autosifu-pillar {
           padding: 28px 22px;
+          gap: 20px;
         }
 
         /* Training cards */
@@ -3460,6 +3545,46 @@
           align-items: flex-start;
           gap: 8px;
         }
+        .cirt-autosifu-context__visual {
+          aspect-ratio: 3 / 2;
+        }
+
+        /* Hero ambient SVG — fade out completely on tiny screens to prevent overlap with headline */
+        .cirt-autosifu-hero__ambient {
+          opacity: 0.12;
+        }
+        .cirt-autosifu-hero__ambient svg {
+          width: 480px;
+          height: 480px;
+          right: -40%;
+        }
+
+        /* Long strings don't force horizontal scroll */
+        .cirt-autosifu-page h1,
+        .cirt-autosifu-page h2,
+        .cirt-autosifu-page h3 {
+          overflow-wrap: break-word;
+          word-break: break-word;
+          hyphens: auto;
+        }
+      }
+
+      /* ---- Smooth scroll for anchor links (all devices) ---- */
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* ---- Better focus-visible across the page ---- */
+      .cirt-autosifu-page a:focus-visible,
+      .cirt-autosifu-page button:focus-visible {
+        outline: 2px solid var(--cirt-autosifu-accent);
+        outline-offset: 3px;
+        border-radius: 4px;
       }
     </style>
   </head>
