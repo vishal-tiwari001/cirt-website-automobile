@@ -3110,10 +3110,99 @@
         }
       }
 
+      /* ==============================================================
+   MOBILE TUNING — comprehensive polish for touch devices
+   ============================================================== */
+
+      /* ---- Tablet + below (<=900px) ---- */
+      @media (max-width: 900px) {
+        /* Tighter section rhythm */
+        .cirt-autosifu-section {
+          padding-top: clamp(64px, 10vw, 96px);
+          padding-bottom: clamp(64px, 10vw, 96px);
+        }
+
+        /* Compliance Horizon Map → card list on mobile (2D plot doesn't work at small size) */
+        .cirt-autosifu-horizon-map__canvas {
+          display: block;
+          padding: clamp(20px, 3vw, 28px);
+        }
+        .cirt-autosifu-hml-y,
+        .cirt-autosifu-hml-x,
+        .cirt-autosifu-hml-grid,
+        .cirt-autosifu-hml-now-label {
+          display: none;
+        }
+        .cirt-autosifu-hml-plot {
+          position: static;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          height: auto;
+          min-height: 0;
+          background: none;
+          border: none;
+          border-radius: 0;
+        }
+        .cirt-autosifu-hml-dot-btn {
+          position: relative;
+          left: auto;
+          top: auto;
+          transform: none;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 14px 16px;
+          border: 1px solid var(--cirt-autosifu-line-light);
+          border-radius: 10px;
+          background: #fff;
+          text-align: left;
+          width: 100%;
+          box-shadow: 0 1px 2px rgba(14, 16, 48, 0.03);
+        }
+        .cirt-autosifu-hml-dot-btn:hover .cirt-autosifu-hml-tag,
+        .cirt-autosifu-hml-dot-btn:focus-visible .cirt-autosifu-hml-tag {
+          transform: none;
+          box-shadow: 0 1px 2px rgba(14, 16, 48, 0.06);
+        }
+        .cirt-autosifu-hml-popover {
+          position: static;
+          transform: none;
+          opacity: 1;
+          background: transparent;
+          color: var(--cirt-autosifu-muted);
+          padding: 0;
+          font-size: 12.5px;
+          line-height: 1.5;
+          letter-spacing: 0;
+          white-space: normal;
+          box-shadow: none;
+          max-width: none;
+          flex: 1;
+          pointer-events: none;
+        }
+        .cirt-autosifu-hml-popover::after {
+          display: none;
+        }
+        .cirt-autosifu-hml-tag {
+          flex-shrink: 0;
+          min-width: 92px;
+          justify-content: flex-start;
+          font-size: 10.5px;
+          padding: 6px 10px;
+        }
+      }
+
+      /* ---- Mobile (<=640px) ---- */
       @media (max-width: 640px) {
         .cirt-autosifu-page {
           font-size: 16px;
         }
+        .cirt-autosifu-container {
+          padding: 0 20px;
+        }
+
+        /* Hero */
         .cirt-autosifu-hero__stats {
           grid-template-columns: 1fr 1fr;
           gap: 28px 20px;
@@ -3122,8 +3211,254 @@
           font-size: 10.5px;
           padding: 8px 14px 8px 10px;
         }
+        .cirt-autosifu-hero__actions {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 12px;
+        }
+        .cirt-autosifu-hero__actions .cirt-autosifu-btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        /* ===== YEARS — tighter sizing on mobile, keep editorial italic serif ===== */
+        .cirt-autosifu-horizon__year {
+          font-size: 1.15rem;
+        }
+        .cirt-autosifu-milestone__year {
+          font-size: 1.2rem;
+        }
+        .cirt-autosifu-outlook__list li span {
+          font-size: 1.15rem;
+          min-width: 34px;
+        }
+
+        /* Threat Horizon cards — compact on mobile */
+        .cirt-autosifu-horizon {
+          padding: 24px 20px;
+        }
+        .cirt-autosifu-horizon__head {
+          margin-bottom: 20px;
+          padding-bottom: 14px;
+        }
+        .cirt-autosifu-horizon__tick {
+          padding: 12px 14px;
+          gap: 12px;
+        }
+        .cirt-autosifu-horizon__year {
+          min-width: 72px;
+        }
+        .cirt-autosifu-horizon__event {
+          font-size: 13px;
+        }
+
+        /* Milestones cards — cleaner padding */
+        .cirt-autosifu-milestone {
+          padding: 18px 16px 18px 44px;
+        }
+        .cirt-autosifu-milestone__title {
+          font-size: 15px;
+        }
+        .cirt-autosifu-milestone__sub {
+          font-size: 12.5px;
+        }
+
+        /* Training tabs — horizontal scroll on small screens */
+        .cirt-autosifu-cap__tabs {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          overflow-y: hidden;
+          max-width: 100%;
+          padding: 5px;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .cirt-autosifu-cap__tabs::-webkit-scrollbar {
+          display: none;
+        }
+        .cirt-autosifu-cap__tab {
+          flex-shrink: 0;
+          padding: 9px 14px;
+          font-size: 12.5px;
+        }
+
+        /* Compliance Horizon Map — head + legend tighter */
+        .cirt-autosifu-horizon-map__head {
+          padding: 20px;
+        }
+        .cirt-autosifu-horizon-map__title {
+          font-size: 1.2rem;
+        }
+        .cirt-autosifu-horizon-map__legend {
+          gap: 14px;
+          font-size: 10.5px;
+        }
+
+        /* OEM marquee — smaller for mobile */
+        .cirt-autosifu-oem__name {
+          font-size: 1.4rem;
+        }
+        .cirt-autosifu-oem__head {
+          padding: 0 16px 16px;
+        }
+        .cirt-autosifu-oem__track {
+          gap: 28px;
+          animation-duration: 50s;
+        }
+
+        /* Acronym marquee smaller */
+        .cirt-autosifu-acronyms__track {
+          font-size: 11.5px;
+          gap: 18px;
+          animation-duration: 70s;
+        }
+
+        /* Outlook card — stack actions, tighten */
+        .cirt-autosifu-outlook__card {
+          padding: 28px 22px;
+        }
+        .cirt-autosifu-outlook__body h2 {
+          font-size: clamp(1.7rem, 7.5vw, 2.2rem);
+        }
+        .cirt-autosifu-outlook__sub {
+          font-size: 0.95rem;
+        }
+        .cirt-autosifu-outlook__list li {
+          padding: 14px 0;
+          gap: 14px;
+          font-size: 14px;
+        }
+        .cirt-autosifu-outlook__meta {
+          padding-bottom: 18px;
+        }
+        .cirt-autosifu-outlook__actions {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 14px;
+          padding-top: 18px;
+        }
+        .cirt-autosifu-outlook__actions .cirt-autosifu-btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .cirt-autosifu-outlook__note {
+          text-align: center;
+        }
+
+        /* Collaboration cards */
         .cirt-autosifu-collab-card {
           min-height: auto;
+          padding: 32px 24px;
+        }
+
+        /* Leadership */
+        .cirt-autosifu-lead__header h2 {
+          font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+        }
+        .cirt-autosifu-lead__name {
+          font-size: 1.7rem;
+        }
+        .cirt-autosifu-lead__portrait-badge {
+          width: 44px;
+          height: 44px;
+          bottom: -10px;
+          right: -10px;
+        }
+        .cirt-autosifu-lead__portrait-badge svg {
+          width: 18px;
+          height: 18px;
+        }
+        .cirt-autosifu-lead__creds span {
+          font-size: 10.5px;
+          padding: 6px 9px;
+        }
+
+        /* Compliance map dot-btn on mobile — tag column needs breathing room */
+        .cirt-autosifu-hml-dot-btn {
+          padding: 13px 14px;
+        }
+        .cirt-autosifu-hml-tag {
+          min-width: 84px;
+        }
+
+        /* Pillars grid cards */
+        .cirt-autosifu-pillar {
+          padding: 28px 22px;
+        }
+
+        /* Training cards */
+        .cirt-autosifu-cap-card {
+          padding: 28px 22px;
+        }
+
+        /* Ecosystem tiles */
+        .cirt-autosifu-eco__item {
+          padding: 24px 20px;
+        }
+
+        /* Engage section — CTAs full-width for thumbs */
+        .cirt-autosifu-engage__card {
+          padding: 36px 24px;
+        }
+        .cirt-autosifu-engage__actions {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 12px;
+        }
+        .cirt-autosifu-engage__actions .cirt-autosifu-btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .cirt-autosifu-engage__info {
+          gap: 22px;
+        }
+
+        /* Section h2 — controlled scale on mobile */
+        .cirt-autosifu-section h2 {
+          font-size: clamp(1.9rem, 7.5vw, 2.5rem);
+          line-height: 1.08;
+        }
+
+        /* CTA buttons minimum tap target */
+        .cirt-autosifu-btn {
+          min-height: 48px;
+          padding: 14px 22px;
+        }
+      }
+
+      /* ---- Very small screens (<=380px) ---- */
+      @media (max-width: 380px) {
+        .cirt-autosifu-hero__stats {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .cirt-autosifu-oem__head {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .cirt-autosifu-horizon-map__head {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+        }
+        .cirt-autosifu-hml-dot-btn {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+        .cirt-autosifu-hml-tag {
+          min-width: auto;
+        }
+        .cirt-autosifu-milestones__head {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+        .cirt-autosifu-horizon__head {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
         }
       }
     </style>
@@ -4595,13 +4930,13 @@
             <!-- CIRT Card -->
             <article
               class="cirt-autosifu-collab-card cirt-autosifu-reveal"
-              aria-labelledby="cirt-autosifu-collab-cirt-autosifu-title"
+              aria-labelledby="cirt-autosifu-collab-regulator-title"
             >
               <div class="cirt-autosifu-collab-card__role">
                 <span class="cirt-autosifu-dot-red" aria-hidden="true"></span>
                 The Regulator
               </div>
-              <h3 id="cirt-autosifu-collab-cirt-autosifu-title">
+              <h3 id="cirt-autosifu-collab-regulator-title">
                 Central Institute of Road Transport
               </h3>
               <p
